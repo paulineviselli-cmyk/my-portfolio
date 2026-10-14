@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fidelity Capital Investmnet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1a;
+      --card: #121a2b;
+      --card-hover: #162033;
+      --border: #1e2d45;
+      --text: #e8eef7;
+      --muted: #8b9cb3;
+      --accent: #22c55e;
+      --accent-dark: #16a34a;
+      --blue: #3b82f6;
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #0f172a 0%, #0a0f1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #0a0f1a;
+    }
+
+    .logo h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Main */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: background 0.2s;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-2, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Balance */
+    .balance-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin: 8px 0 4px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* Price cards */
+    .price-card {
+      text-align: center;
+      padding: 18px 12px;
+    }
+
+    .price-card .symbol {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .price-card .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .price-card .change {
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    .up { color: #22c55e; }
+    .down { color: #ef4444; }
+
+    /* Forms */
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a0f1a;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0f1a;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: #1e2d45;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #243852;
+    }
+
+    /* Performance */
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .info-box strong {
+      color: #93c5fd;
+    }
+
+    /* KYC status */
+    .kyc-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(234, 179, 8, 0.15);
+      color: #eab308;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark">FC</div>
+        <div>
+          <h1>Fidelity Capital Investment</h1>
+          <p>Build your financial future</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Live Prices -->
+    <section class="section">
+      <h2 class="section-title">Live Crypto Prices</h2>
+      <div class="grid-4" id="price-grid">
+        <div class="card price-card">
+          <div class="symbol">BTC</div>
+          <div class="price" id="btc-price">—</div>
+          <div class="change" id="btc-change"></div>
+        </div>
+        <div class="card price-card">
+          <div class="symbol">ETH</div>
+          <div class="price" id="eth-price">—</div>
+          <div class="change" id="eth-change"></div>
+        </div>
+        <div class="card price-card">
+          <div class="symbol">USDT</div>
+          <div class="price" id="usdt-price">—</div>
+          <div class="change" id="usdt-change"></div>
+        </div>
+        <div class="card price-card">
+          <div class="symbol">LTC</div>
+          <div class="price" id="ltc-price">—</div>
+          <div class="change" id="ltc-change"></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:10px">Prices update every 60 seconds • Source: CoinGecko</p>
+    </section>
+
+    <!-- Balance -->
+    <section class="section">
+      <div class="card">
+        <p style="color:var(--muted);font-size:0.9rem">Demo Account Balance</p>
+        <div class="balance-value">$1,000.00</div>
+        <p class="note">This is a sample balance only. No real funds are held or processed on this page.</p>
+      </div>
+    </section>
+
+    <!-- Performance -->
+    <section class="section">
+      <h2 class="section-title">Portfolio Performance</h2>
+      <div class="card">
+        <div class="grid-2" style="margin-bottom:20px">
+          <div class="stat">
+            <div class="stat-value up">+4.8%</div>
+            <div class="stat-label">30-Day Return (Demo)</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">$48.00</div>
+            <div class="stat-label">Unrealized P&L (Demo)</div>
+          </div>
+        </div>
+        <p class="note">Performance figures are illustrative only and do not represent real trading results.</p>
+      </div>
+    </section>
+
+    <!-- Crypto Investing Basics -->
+    <section class="section">
+      <h2 class="section-title">Crypto Investing Basics</h2>
+      <div class="info-box">
+        <p><strong>Cryptocurrency</strong> is digital money that runs on blockchain technology — a decentralized ledger secured by cryptography. Unlike traditional currencies, no single bank or government controls it.</p>
+        <br>
+        <p>People invest in crypto for potential long-term growth, portfolio diversification, and as a hedge against inflation. Popular assets include Bitcoin (often called “digital gold”), Ethereum (smart-contract platform), and stablecoins like USDT that aim to stay close to $1.</p>
+        <br>
+        <p><strong>Important:</strong> Crypto is highly volatile. Prices can swing dramatically in short periods. Only invest money you can afford to lose, start small, and never share your private keys or seed phrases.</p>
+      </div>
+    </section>
+
+    <!-- Investment Plans -->
+    <section class="section">
+      <h2 class="section-title">Investment Plans</h2>
+      <div class="card">
+        <h3 style="font-size:1.05rem;margin-bottom:8px">Starter Plan</h3>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px">
+          Explore how diversified crypto portfolios work. Learn risk management and long-term holding strategies.
+        </p>
+        <button class="btn-primary" onclick="alert('Demo only. No real investment has been made.')">
+          Explore Plan
+        </button>
+      </div>
+    </section>
+
+    <!-- KYC -->
+    <section class="section">
+      <h2 class="section-title">
+        KYC Verification
+        <span class="kyc-status">Pending</span>
+      </h2>
+      <div class="card">
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:18px">
+          Complete identity verification to unlock higher limits (demo form only).
+        </p>
+        <form id="kyc-form" onsubmit="submitKYC(event)">
+          <label>Full Legal Name</label>
+          <input type="text" placeholder="John Doe" required>
+
+          <label>Date of Birth</label>
+          <input type="date" required>
+
+          <label>Country of Residence</label>
+          <select required>
+            <option value="">Select country</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Canada</option>
+            <option>Other</option>
+          </select>
+
+          <label>ID Type</label>
+          <select required>
+            <option value="">Select ID</option>
+            <option>Social Security Number</option>
+            <option>Driver’s License (Front / Back)</option>
+          </select>
+
+          <button type="submit" class="btn-primary">Submit KYC (Demo)</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Deposit & Withdraw -->
+    <section class="section">
+      <h2 class="section-title">Deposit & Withdraw</h2>
+      <div class="grid-2">
+        <!-- Deposit -->
+        <div class="card">
+          <h3 style="font-size:1.05rem;margin-bottom:14px">Deposit</h3>
+          <label>Amount (USD)</label>
+          <input type="number" id="deposit-amount" placeholder="Enter amount" min="1" step="0.01">
+
+          <label>Payment Method</label>
+          <select id="deposit-method">
+            <option value="crypto">Crypto (BTC / ETH / USDT / LTC)</option>
+            <option value="giftcard">Gift Card Code</option>
+            <option value="card">Debit / Credit Card</option>
+          </select>
+
+          <button class="btn-primary" onclick="handleDeposit()">Deposit</button>
+        </div>
+
+        <!-- Withdraw -->
+        <div class="card">
+          <h3 style="font-size:1.05rem;margin-bottom:14px">Withdraw</h3>
+          <label>Amount (USD)</label>
+          <input type="number" id="withdraw-amount" placeholder="Enter amount" min="1" step="0.01">
+
+          <label>Withdrawal Method</label>
+          <select id="withdraw-method">
+            <option value="crypto">Crypto Wallet</option>
+            <option value="bank">Bank Account</option>
+          </select>
+
+          <button class="btn-secondary" onclick="handleWithdraw()">Withdraw</button>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">
+        Deposits and invest for a better future.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Fidelity Capital Investment • 
+  </footer>
+
+  <script>
+    // ========== Live Prices ==========
+    async function fetchPrices() {
+      try {
+        const res = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,litecoin&vs_currencies=usd&include_24hr_change=true'
+        );
+        const data = await res.json();
+
+        updatePrice('btc', data.bitcoin);
+        updatePrice('eth', data.ethereum);
+        updatePrice('usdt', data.tether);
+        updatePrice('ltc', data.litecoin);
+      } catch (err) {
+        console.error('Price fetch failed', err);
+        // Fallback static prices (approx Oct 2026)
+        document.getElementById('btc-price').textContent = '$81,800';
+        document.getElementById('eth-price').textContent = '$2,420';
+        document.getElementById('usdt-price').textContent = '$1.00';
+        document.getElementById('ltc-price').textContent = '$59.50';
+      }
+    }
+
+    function updatePrice(id, coin) {
+      if (!coin) return;
+      const priceEl = document.getElementById(`${id}-price`);
+      const changeEl = document.getElementById(`${id}-change`);
+
+      const price = coin.usd;
+      priceEl.textContent = price >= 1
+        ? '$' + price.toLocaleString('en-US', { maximumFractionDigits: 2 })
+        : '$' + price.toFixed(4);
+
+      const change = coin.usd_24h_change || 0;
+      changeEl.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+      changeEl.className = 'change ' + (change >= 0 ? 'up' : 'down');
+    }
+
+    // ========== Portfolio Actions ==========
+    function handleDeposit() {
+      const amount = document.getElementById('deposit-amount').value;
+      const method = document.getElementById('deposit-method').value;
+      if (!amount || amount <= 0) {
+        alert('Please enter a valid amount.');
+        return;
+      }
+    }
+
+    function handleWithdraw() {
+      const amount = document.getElementById('withdraw-amount').value;
+      const method = document.getElementById('withdraw-method').value;
+      if (!amount || amount <= 0) {
+        alert('Please enter a valid amount.');
+        return;
+      }
+    }
+
+    function submitKYC(e) {
+      e.preventDefault();
+      alert('KYC submitted )
+      document.querySelector('.kyc-status').textContent = 'Under Review';
+      document.querySelector('.kyc-status').style.background = 'rgba(59,130,246,0.15)';
+      document.querySelector('.kyc-status').style.color = '#3b82f6';
+      document.querySelector('.kyc-status').style.borderColor = 'rgba(59,130,246,0.3)';
+    }
+
+    // Initial load + refresh every 120s
+    fetchPrices();
+    setInterval(fetchPrices, 60000);
+  </script>
+</body>
+</html>
